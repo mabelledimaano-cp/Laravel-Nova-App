@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Metrics\NewMovies;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Laravel\Nova\Fields\FormData;
 use Illuminate\Validation\Rule;
@@ -122,7 +123,9 @@ class Movie extends Resource
      */
     public function cards(NovaRequest $request)
     {
-        return [];
+        return [
+            new NewMovies(),
+        ];
     }
 
     /**
