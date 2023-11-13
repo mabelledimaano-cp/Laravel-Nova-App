@@ -91,7 +91,7 @@ class Movie extends Resource
 
             BelongsTo::make('Film Studio', 'studio', Studio::class)
                 ->showCreateRelationButton()
-                ->modalSize('2xl')
+                ->modalSize('3xl')
                 ->hideFromIndex()
                 ->searchable()
                 ->filterable(),
