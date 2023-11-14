@@ -2,6 +2,8 @@
 
 namespace App\Nova;
 
+use App\Nova\Metrics\MoviesPerGenre;
+use App\Nova\Metrics\MoviesPerStudio;
 use App\Nova\Metrics\NewMovies;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Laravel\Nova\Fields\FormData;
@@ -125,6 +127,8 @@ class Movie extends Resource
     {
         return [
             new NewMovies(),
+            new MoviesPerGenre(),
+            new MoviesPerStudio(),
         ];
     }
 

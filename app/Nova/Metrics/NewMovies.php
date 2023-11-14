@@ -47,4 +47,9 @@ class NewMovies extends Value
 //    {
 //        // return now()->addMinutes(5);
 //    }
+
+    public function uriKey(): string
+    {
+        return 'new-movies';
+    }
 }
