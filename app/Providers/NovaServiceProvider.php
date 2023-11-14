@@ -2,7 +2,15 @@
 
 namespace App\Providers;
 
+use App\Nova\Dashboards\Main;
+use App\Nova\Director;
+use App\Nova\Genre;
+use App\Nova\Studio;
+use App\Nova\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Laravel\Nova\Menu\MenuItem;
+use Laravel\Nova\Menu\MenuSection;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 
@@ -17,6 +25,35 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         parent::boot();
         Nova::withBreadcrumbs();
+
+        $this->customMenu();
+    }
+
+    private function customMenu()
+    {
+        Nova::mainMenu(function (Request $request) {
+            return [
+                MenuSection::dashboard(Main::class)
+                    ->icon('chart-pie'),
+
+                MenuSection::make('Movies', [
+                    MenuItem::make('All Movies', '/resources/movies'),
+                    MenuItem::make('Add Movie', '/resources/movies/new'),
+                ])->icon('film')->collapsable(),
+
+                MenuSection::resource(Genre::class)
+                    ->icon('tag'),
+
+                MenuSection::resource(Studio::class)
+                    ->icon('globe-alt'),
+
+                MenuSection::resource(Director::class)
+                    ->icon('video-camera'),
+
+                MenuSection::resource(User::class)
+                    ->icon('user-group'),
+            ];
+        });
     }
 
     /**
@@ -79,5 +116,5 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         return [];
     }
-    
+
 }
