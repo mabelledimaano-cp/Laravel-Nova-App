@@ -43,6 +43,11 @@ class Movie extends Resource
         'studio.company_name',
     ];
 
+    public function title()
+    {
+        return $this->title . ' (' . $this->year . ')';
+    }
+
     /**
      * Get the fields displayed by the resource.
      *
@@ -163,5 +168,10 @@ class Movie extends Resource
     public function actions(NovaRequest $request)
     {
         return [];
+    }
+
+    public function subtitle()
+    {
+        return $this->director->name;
     }
 }
