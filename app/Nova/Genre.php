@@ -66,7 +66,7 @@ class Genre extends Resource
 
     public function subtitle()
     {
-        return $this->parent?->name ?? '-';
+        return $this->parent?->name ?? '';
     }
 
     /**
@@ -128,6 +128,4 @@ class Genre extends Resource
             }),
         ];
     }
-
-
 }
