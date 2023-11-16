@@ -23,6 +23,6 @@ class Genre extends Model
 
     public function movies(): HasMany
     {
-        return $this->hasMany(Movie::class);
+        return $this->hasMany(Movie::class, 'subgenre_id', 'id')->orWhere('genre_id', $this->id);
     }
 }
