@@ -3,7 +3,9 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "build-tmdb": "cd nova-components/Tmdb && npm run dev",
+        "build-tmdb-prod": "cd nova-components/Tmdb && npm run prod"
     },
     "devDependencies": {
         "axios": "^1.1.2",
