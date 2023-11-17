@@ -6,6 +6,10 @@ use App\Nova\Metrics\MoviesPerGenre;
 use App\Nova\Metrics\MoviesPerStudio;
 use App\Nova\Metrics\NewMovies;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Laravel\Nova\Actions\Action;
+use Laravel\Nova\Fields\ActionFields;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\FormData;
 use Illuminate\Validation\Rule;
 use Laravel\Nova\Fields\BelongsTo;
@@ -118,7 +122,10 @@ class Movie extends Resource
                 ->min(1)
                 ->max(5)
                 ->rules('min:1', 'max:5', 'integer', 'required')
-                ->help('Rating from 1 to 5'),
+                ->help('IMDb Rating from 1 to 5'),
+
+            Boolean::make('Is Featured')
+                ->filterable(),
         ];
     }
 
@@ -167,7 +174,22 @@ class Movie extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            Action::using('Feature', function (ActionFields $fields, Collection $models) {
+                \App\Models\Movie::whereKey($models->pluck('id'))
+                    ->where('is_featured', false)
+                    ->update([
+                        'is_featured' => true,
+                    ]);
+            }),
+            Action::using('Unfeature', function (ActionFields $fields, Collection $models) {
+                \App\Models\Movie::whereKey($models->pluck('id'))
+                    ->where('is_featured', true)
+                    ->update([
+                        'is_featured' => false,
+                    ]);
+            }),
+        ];
     }
 
     public function subtitle()
