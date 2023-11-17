@@ -7,6 +7,7 @@ use App\Nova\Director;
 use App\Nova\Genre;
 use App\Nova\Studio;
 use App\Nova\User;
+use Demo\Tmdb\Tmdb;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Menu\MenuItem;
@@ -25,6 +26,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         parent::boot();
         Nova::withBreadcrumbs();
+        Nova::initialPath('/resources/movies');
 
         $this->customMenu();
     }
@@ -33,9 +35,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         Nova::mainMenu(function (Request $request) {
             return [
-                MenuSection::dashboard(Main::class)
-                    ->icon('chart-pie'),
-
                 MenuSection::make('Movies', [
                     MenuItem::make('All Movies', '/resources/movies'),
                     MenuItem::make('Add Movie', '/resources/movies/new'),
@@ -49,6 +48,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
 
                 MenuSection::resource(Director::class)
                     ->icon('video-camera'),
+
+                (new Tmdb())->menu($request),
 
                 MenuSection::resource(User::class)
                     ->icon('user-group'),
@@ -103,7 +104,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function dashboards()
     {
         return [
-            new \App\Nova\Dashboards\Main,
+            new \App\Nova\Dashboards\Main(),
         ];
     }
 
@@ -114,7 +115,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function tools()
     {
-        return [];
+        return [
+            new Tmdb(),
+        ];
     }
-
 }
