@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Laravel\Nova\Actions\Actionable;
 
 class Movie extends Model
 {
     use HasFactory;
+    use Actionable;
 
     protected $with = [
         'genre',
@@ -34,5 +36,4 @@ class Movie extends Model
     {
         return $this->belongsTo(Studio::class);
     }
-
 }
