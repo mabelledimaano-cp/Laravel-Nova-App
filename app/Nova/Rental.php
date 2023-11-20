@@ -71,8 +71,7 @@ class Rental extends Resource
                 ->creationRules('required')
                 ->updateRules('nullable'),
 
-            Text::make('Reference Number')
-                ->required(),
+            Text::make('Reference Number'),
 
             Boolean::make('Is Paid'),
         ];
