@@ -35,24 +35,24 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         Nova::mainMenu(function (Request $request) {
             return [
+                (new Tmdb())->menu($request),
+
                 MenuSection::make('Movies', [
                     MenuItem::make('All Movies', '/resources/movies'),
                     MenuItem::make('Add Movie', '/resources/movies/new'),
+                    MenuItem::make('Genres', '/resources/movies/genres'),
+                    MenuItem::make('Directors', '/resources/movies/directors'),
+                    MenuItem::make('Studios', '/resources/movies/studios'),
                 ])->icon('film')->collapsable(),
 
-                MenuSection::resource(Genre::class)
-                    ->icon('tag'),
+                MenuSection::make('Customers', [
+                    MenuItem::make('All Customers', '/resources/customers'),
+                    MenuItem::make('Rentals', '/resources/rentals'),
+                ])->icon('users'),
 
-                MenuSection::resource(Studio::class)
-                    ->icon('globe-alt'),
-
-                MenuSection::resource(Director::class)
-                    ->icon('video-camera'),
-
-                (new Tmdb())->menu($request),
-
-                MenuSection::resource(User::class)
-                    ->icon('user-group'),
+                MenuSection::make('Support', [
+                    MenuItem::make('Admins', '/resources/users'),
+                ])->icon('cog'),
             ];
         });
     }
