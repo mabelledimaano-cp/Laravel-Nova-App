@@ -72,7 +72,8 @@ class Rental extends Resource
 
             Text::make('Reference Number'),
 
-            Boolean::make('Is Paid'),
+            Boolean::make('Is Paid')
+                ->filterable(),
         ];
     }
 
