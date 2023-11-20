@@ -2,7 +2,10 @@
 
 namespace App\Nova;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Laravel\Nova\Actions\Action;
+use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasOne;
@@ -116,6 +119,23 @@ class Rental extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            Action::using('Paid Status', function (ActionFields $fields, Collection $models) {
+                \App\Models\Rental::whereKey($models->pluck('id'))
+                    ->where('is_paid', false)
+                    ->update([
+                        'is_paid' => true,
+                    ]);
+            })->withoutConfirmation()
+                ->onlyOnDetail(),
+
+            Action::using('Unpaid Status', function (ActionFields $fields, Collection $models) {
+                \App\Models\Rental::whereKey($models->pluck('id'))
+                    ->where('is_paid', true)
+                    ->update([
+                        'is_paid' => false,
+                    ]);
+            })->onlyOnDetail(),
+        ];
     }
 }

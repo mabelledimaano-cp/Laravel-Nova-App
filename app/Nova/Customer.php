@@ -2,7 +2,10 @@
 
 namespace App\Nova;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Laravel\Nova\Actions\Action;
+use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
@@ -122,6 +125,23 @@ class Customer extends Resource
      */
     public function actions(NovaRequest $request)
     {
-        return [];
+        return [
+            Action::using('Verify', function (ActionFields $fields, Collection $models) {
+                \App\Models\Customer::whereKey($models->pluck('id'))
+                    ->where('is_verified', false)
+                    ->update([
+                        'is_verified' => true,
+                    ]);
+            })->withoutConfirmation()
+                ->onlyOnDetail(),
+
+            Action::using('Unverify', function (ActionFields $fields, Collection $models) {
+                \App\Models\Customer::whereKey($models->pluck('id'))
+                    ->where('is_verified', true)
+                    ->update([
+                        'is_verified' => false,
+                    ]);
+            })->onlyOnDetail(),
+        ];
     }
 }

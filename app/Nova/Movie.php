@@ -181,14 +181,16 @@ class Movie extends Resource
                     ->update([
                         'is_featured' => true,
                     ]);
-            })->withoutConfirmation(),
+            })->withoutConfirmation()
+                ->showInline(),
+
             Action::using('Unfeature', function (ActionFields $fields, Collection $models) {
                 \App\Models\Movie::whereKey($models->pluck('id'))
                     ->where('is_featured', true)
                     ->update([
                         'is_featured' => false,
                     ]);
-            }),
+            })->showInline(),
         ];
     }
 
