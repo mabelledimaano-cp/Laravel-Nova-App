@@ -122,7 +122,7 @@ class Movie extends Resource
                 ->min(1)
                 ->max(5)
                 ->rules('min:1', 'max:5', 'integer', 'required')
-                ->help('IMDb Rating from 1 to 5'),
+                ->help('TMDb Rating from 1 to 5'),
 
             Boolean::make('Is Featured')
                 ->filterable(),
