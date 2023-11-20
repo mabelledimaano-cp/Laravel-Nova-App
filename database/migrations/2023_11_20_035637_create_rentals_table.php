@@ -16,9 +16,9 @@ return new class extends Migration {
             $table->id();
             $table->foreignIdFor(Customer::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Movie::class)->constrained()->cascadeOnDelete();
-            $table->string('payment_method');
-            $table->string('proof_of_payment');
-            $table->string('reference_number');
+            $table->string('payment_method')->nullable();
+            $table->string('proof_of_payment')->nullable();
+            $table->string('reference_number')->nullable();
             $table->boolean('is_paid');
             $table->timestamps();
         });
