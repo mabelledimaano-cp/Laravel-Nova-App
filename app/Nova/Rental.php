@@ -68,8 +68,7 @@ class Rental extends Resource
 
             Image::make('Proof of Payment')
                 ->path('customers')
-                ->creationRules('required')
-                ->updateRules('nullable'),
+                ->nullable(),
 
             Text::make('Reference Number'),
 
