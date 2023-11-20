@@ -21617,18 +21617,12 @@ __webpack_require__.r(__webpack_exports__);
       items: []
     });
     var generateStarRating = function generateStarRating(rating) {
-      // Scale the rating from 0-10 to the 0-5 star system
       var roundedRating = Math.round(rating / 2 + .45);
-
-      // Ensure the roundedRating is within the valid range of 0 to 5
       roundedRating = Math.min(Math.max(roundedRating, 0), 5);
       var starIcons = '★'.repeat(Math.floor(roundedRating));
       if (roundedRating % 1 !== 0) {
-        // If there's a decimal part, add a half star
         starIcons += '<span class="half-star">½</span>';
       }
-
-      // Add empty stars for the remaining space
       starIcons += '☆'.repeat(5 - Math.ceil(roundedRating));
       return starIcons;
     };
@@ -21674,10 +21668,22 @@ var _withScopeId = function _withScopeId(n) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-ef10eebe"), n = n(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)(), n;
 };
 var _hoisted_1 = ["src"];
-var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_2 = {
+  "class": "flex flex-col justify-between h-full"
+};
+var _hoisted_3 = {
+  "class": "text-xl font-bold mb-2"
+};
+var _hoisted_4 = {
+  "class": "max-w-2xl text-justify mb-2"
+};
+var _hoisted_5 = {
+  "class": "mt-auto"
+};
+var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Rating: ", -1 /* HOISTED */);
 });
-var _hoisted_3 = ["innerHTML"];
+var _hoisted_7 = ["innerHTML"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
   var _component_Heading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Heading");
@@ -21698,13 +21704,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.data.items, function (movie) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
           key: movie.id,
-          "class": "movie-card"
+          "class": "movie-card flex flex-col justify-between"
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
           src: 'https://image.tmdb.org/t/p/w500' + movie.poster_path,
-          alt: ""
-        }, null, 8 /* PROPS */, _hoisted_1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(movie.title), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(movie.overview), 1 /* TEXT */), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+          alt: "",
+          "class": "w-15"
+        }, null, 8 /* PROPS */, _hoisted_1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(movie.title), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(movie.overview), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
           innerHTML: $setup.generateStarRating(movie.vote_average)
-        }, null, 8 /* PROPS */, _hoisted_3), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((movie.vote_average * 10).toFixed(2)) + "%)", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, " Release Date: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.moment(movie.release_date).format('MMMM DD, YYYY')), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Add other movie details as needed ")]);
+        }, null, 8 /* PROPS */, _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, " (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((movie.vote_average * 10).toFixed(2)) + "%)", 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Release Date: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.moment(movie.release_date).format('MMMM DD, YYYY')), 1 /* TEXT */)])])]);
       }), 128 /* KEYED_FRAGMENT */))];
     }),
 
@@ -21747,7 +21754,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.half-star[data-v-ef10eebe] {\n    font-size: 0.8em; /* Adjust the font size as needed */\n}\n.movie-container[data-v-ef10eebe] {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-between;\n}\n.movie-card[data-v-ef10eebe] {\n    width: calc(25% - 16px); /* Adjust the width based on your design, considering margins */\n    margin-bottom: 16px; /* Add margin for spacing between cards */\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.half-star[data-v-ef10eebe] {\n    font-size: 0.8em;\n}\n.movie-container[data-v-ef10eebe] {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: space-between;\n}\n.movie-card[data-v-ef10eebe] {\n    width: calc(25% - 16px);\n    margin-bottom: 16px;\n}\n.text-justify[data-v-ef10eebe] {\n    text-align: justify;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
