@@ -40,9 +40,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuSection::make('Movies', [
                     MenuItem::make('All Movies', '/resources/movies'),
                     MenuItem::make('Add Movie', '/resources/movies/new'),
-                    MenuItem::make('Genres', '/resources/movies/genres'),
-                    MenuItem::make('Directors', '/resources/movies/directors'),
-                    MenuItem::make('Studios', '/resources/movies/studios'),
+                    MenuItem::make('Genres', '/resources/genres'),
+                    MenuItem::make('Directors', '/resources/directors'),
+                    MenuItem::make('Studios', '/resources/studios'),
                 ])->icon('film')->collapsable(),
 
                 MenuSection::make('Customers', [
