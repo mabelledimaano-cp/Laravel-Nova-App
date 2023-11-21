@@ -16,4 +16,12 @@ class Customer extends Model
     {
         return $this->hasMany(Rental::class);
     }
+
+    protected $appends = [
+        'name'
+    ];
+
+    public function getNameAttribute() {
+        return ($this->middle_name ? $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name : $this->first_name . ' ' . $this->last_name);
+    }
 }
