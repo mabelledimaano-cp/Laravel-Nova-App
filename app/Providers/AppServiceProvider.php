@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Customer;
+use App\Models\Movie;
+use App\Models\Rental;
+use App\Observers\CustomerObserver;
+use App\Observers\MovieObserver;
+use App\Observers\RentalObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +25,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->observers();
+    }
+
+    public function observers(): void
+    {
+        Movie::observe(MovieObserver::class);
+        Customer::observe(CustomerObserver::class);
+        Rental::observe(RentalObserver::class);
     }
 }
