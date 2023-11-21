@@ -35,7 +35,7 @@ class Customer extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'first_name', 'last_name'
     ];
 
     public function title()
