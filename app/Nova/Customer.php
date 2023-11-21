@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\Email;
+use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
@@ -40,7 +42,7 @@ class Customer extends Resource
 
     public function title()
     {
-        return $this->first_name . ' ' . $this->last_name;
+        return $this->name;
     }
 
     /**
@@ -54,10 +56,11 @@ class Customer extends Resource
         return [
             ID::make()->sortable(),
 
+            Gravatar::make(),
+
             Text::make('First Name')
                 ->rules('string')
-                ->creationRules('required')
-                ->updateRules('nullable')
+                ->required()
                 ->sortable(),
 
             Text::make('Middle Name')
@@ -67,9 +70,11 @@ class Customer extends Resource
 
             Text::make('Last Name')
                 ->rules('string')
-                ->creationRules('required')
-                ->updateRules('nullable')
+                ->required()
                 ->sortable(),
+
+            Email::make('Email Address', 'email')
+                ->required(),
 
             Image::make('Valid ID')
                 ->path('customers')
