@@ -46,8 +46,7 @@ class Studio extends Resource
 
             Image::make('Logo')
                 ->path('studios')
-                ->creationRules('required')
-                ->updateRules('nullable'),
+                ->nullable(),
 
             Text::make('Company Name')
                 ->sortable()

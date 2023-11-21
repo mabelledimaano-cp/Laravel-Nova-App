@@ -51,8 +51,7 @@ class Director extends Resource
                 ->rounded()
                 ->rules('image', 'max:10240')
                 ->path('directors')
-                ->creationRules('required')
-                ->updateRules('nullable'),
+                ->nullable(),
 
             Text::make('Name')
                 ->sortable()
